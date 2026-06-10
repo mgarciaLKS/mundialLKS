@@ -4813,8 +4813,8 @@ function updateSubmitButton() {
   const btn = document.getElementById('btnSubmit');
   if (!btn || !LOADED) return;
 
-  const { complete, missing } = getFormCompleteness();
-  btn.disabled = !complete;
+  // El plazo de envío de quinielas ha cerrado — botón siempre deshabilitado.
+  btn.disabled = true;
 
   let hint = document.getElementById('submitHint');
   if (!hint) {
@@ -4827,15 +4827,9 @@ function updateSubmitButton() {
     btn.parentNode.insertBefore(hint, btn.nextSibling);
   }
 
-  if (!complete) {
-    hint.innerHTML = '<strong>⚠️ Rellena estos campos antes de enviar:</strong><ul>' +
-      missing.map(m => '<li>' + escapeHtml(m) + '</li>').join('') + '</ul>';
-    hint.style.display = '';
-    btn.setAttribute('aria-describedby', 'submitHint');
-  } else {
-    hint.style.display = 'none';
-    btn.removeAttribute('aria-describedby');
-  }
+  hint.innerHTML = '<strong>🔒 El plazo de envío de quinielas ha cerrado. ¡Ya no se aceptan apuestas!</strong>';
+  hint.style.display = '';
+  btn.setAttribute('aria-describedby', 'submitHint');
 }
 
 function submitPrediction() {
