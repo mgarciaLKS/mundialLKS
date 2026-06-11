@@ -4837,11 +4837,6 @@ function updateSubmitButton() {
     btn.removeAttribute('aria-describedby');
   }
 
-  // El plazo de envío de quinielas ha cerrado — botón siempre deshabilitado.
-  btn.disabled = true;
-  hint.innerHTML = '<strong>🔒 El plazo de envío de quinielas ha cerrado. ¡Ya no se aceptan apuestas!</strong>';
-  hint.style.display = '';
-  btn.setAttribute('aria-describedby', 'submitHint');
 }
 
 function submitPrediction() {
