@@ -19,7 +19,7 @@ const RESULTS = {
       "Mexico__South Africa": { "home": 2, "away": 0 },
       "South Korea__Czech Republic": { "home": 2, "away": 1 },
       "Czech Republic__South Africa": { "home": 1, "away": 1 },
-      "Mexico__South Korea": { "home": 1, "away": 0 },
+      "Mexico__South Korea": { "home": 1, "away": 0 }
     },
     "B": {
       "Canada__Bosnia & Herzegovina": { "home": 1, "away": 1 },
