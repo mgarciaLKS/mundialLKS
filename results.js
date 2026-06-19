@@ -48,9 +48,9 @@ const RESULTS = {
   // QUINIELA_1X2_MATCHES dentro de app.js. Dejar "" mientras el partido no
   // se haya jugado.
   quiniela1x2: {
-    "Mexico__South Korea": "1",
-    "Morocco__Scotland":   "",
-    "Spain__Uruguay":      ""
+    "Corea del Sur__México": "1",
+    "Escocia__Marruecos":    "",
+    "España__Uruguay":       ""
   },
 
   knockout: {
