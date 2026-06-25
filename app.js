@@ -20,7 +20,7 @@ const puntuaciones = {
   },
   quiniela1x2: 1,
   eliminatorias: {
-    round32: 0,
+    round32: 2,
     round16: 5,
     quarterfinals: 5,
     semifinals: 10,
@@ -3881,6 +3881,7 @@ function openScoringHelpModal() {
         <div class="scoring-help-card">
           <h4>🥊 Eliminatorias</h4>
           <ul>
+            <li>Equipo en dieciseisavos: <strong>${puntuaciones.eliminatorias.round32} pts</strong></li>
             <li>Equipo en octavos: <strong>${puntuaciones.eliminatorias.round16} pts</strong></li>
             <li>Equipo en cuartos: <strong>${puntuaciones.eliminatorias.quarterfinals} pts</strong></li>
             <li>Equipo en semifinales: <strong>${puntuaciones.eliminatorias.semifinals} pts</strong></li>
