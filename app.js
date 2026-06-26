@@ -3831,11 +3831,22 @@ function closePredictionModal() {
 
 
 function hasAnyRealKnockoutMatch() {
-  const matches = RESULTS?.knockout?.matches || {};
-  return ['round32','round16','quarterfinals','semifinals','thirdPlace','final'].some(round => {
-    const arr = matches[round];
-    return Array.isArray(arr) && arr.some(m => m && (m.team1 || m.team2 || m.winner));
-  });
+  const ko = RESULTS?.knockout || {};
+  const matches = ko.matches || {};
+  const rounds = ['round32','round16','quarterfinals','semifinals','thirdPlace','final'];
+
+  // New payload format: explicit match objects in knockout.matches
+  if (rounds.some(round => Array.isArray(matches[round]) && matches[round].some(m => m && (m.team1 || m.team2 || m.winner)))) {
+    return true;
+  }
+
+  // Legacy payload format: winners stored directly on knockout.*
+  const winnerRounds = ['round32','round16','quarterfinals','semifinals'];
+  if (winnerRounds.some(round => Array.isArray(ko[round]) && ko[round].some(Boolean))) return true;
+  if (ko.final || ko.champion || RESULTS?.champion) return true;
+  if (ko.thirdPlace || ko.thirdPlaceWinner || RESULTS?.thirdPlaceWinner) return true;
+
+  return false;
 }
 
 function openRealBracketModal() {
