@@ -1890,8 +1890,8 @@ async function loadData() {
         {num:88,slot1:{type:'runner_up',group:'D'},slot2:{type:'runner_up',group:'G'}}
       ],
       round16: [
-        {num:89,slot1:{type:'winner_of',matchNum:73},slot2:{type:'winner_of',matchNum:75}},
-        {num:90,slot1:{type:'winner_of',matchNum:74},slot2:{type:'winner_of',matchNum:77}},
+        {num:89,slot1:{type:'winner_of',matchNum:74},slot2:{type:'winner_of',matchNum:77}},
+        {num:90,slot1:{type:'winner_of',matchNum:73},slot2:{type:'winner_of',matchNum:75}},
         {num:91,slot1:{type:'winner_of',matchNum:76},slot2:{type:'winner_of',matchNum:78}},
         {num:92,slot1:{type:'winner_of',matchNum:79},slot2:{type:'winner_of',matchNum:80}},
         {num:93,slot1:{type:'winner_of',matchNum:83},slot2:{type:'winner_of',matchNum:84}},
@@ -1901,8 +1901,8 @@ async function loadData() {
       ],
       quarterfinals: [
         {num:97,slot1:{type:'winner_of',matchNum:89},slot2:{type:'winner_of',matchNum:90}},
-        {num:98,slot1:{type:'winner_of',matchNum:93},slot2:{type:'winner_of',matchNum:94}},
-        {num:99,slot1:{type:'winner_of',matchNum:91},slot2:{type:'winner_of',matchNum:92}},
+        {num:98,slot1:{type:'winner_of',matchNum:91},slot2:{type:'winner_of',matchNum:92}},
+        {num:99,slot1:{type:'winner_of',matchNum:93},slot2:{type:'winner_of',matchNum:94}},
         {num:100,slot1:{type:'winner_of',matchNum:95},slot2:{type:'winner_of',matchNum:96}}
       ],
       semifinals: [
