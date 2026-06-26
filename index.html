@@ -88,7 +88,7 @@
 
       <!-- Submit -->
       <div class="submit-section">
-        <button class="submit-btn" id="btnSubmit">&#9917; Sentar cátedra (LKS Next style)</button>
+        <button class="submit-btn" id="btnSubmit" disabled>&#9917; Sentar cátedra (LKS Next style)</button>
       </div>
 
     </div>
@@ -132,7 +132,7 @@
   <div class="confetti-container" id="confettiContainer"></div>
 
   <script src="third_place_table.js?v=group-order-drag-and-new-awards"></script>
-  <script src="results.js?v=simulacion-realista-grupos"></script>
+  <script src="results.js?v=grupo-b-cerrado"></script>
   <script src="app.js?v=real-bracket-view"></script>
   <div class="name-modal-overlay" id="nameModal" style="display:none;">
   <div class="name-modal">
@@ -147,6 +147,10 @@
       maxlength="40"
     >
 
+    <p id="nameModalUpdateHint" class="name-modal-update-hint" style="display:none;">
+      ⚠️ Ya existe una porra con ese nombre. Al confirmar, <strong>se actualizará</strong> tu predicción anterior.
+    </p>
+
     <p>¿Y de qué equipo eres?</p>
     <select id="teamSelect" class="name-modal-select" required aria-required="true">
       <option value="">— Elige tu equipo —</option>
@@ -154,7 +158,7 @@
 
     <div class="name-modal-actions">
       <button type="button" class="toolbar-btn" id="cancelNameSubmit">Paso, debería estar currando</button>
-      <button type="button" class="submit-btn" id="confirmNameSubmit">Apostar fuerte (No hay vuelta atras)</button>
+      <button type="button" class="submit-btn" id="confirmNameSubmit">Apostar fuerte (No hay vuelta atrás)</button>
     </div>
   </div>
 </div>

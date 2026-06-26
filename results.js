@@ -24,12 +24,12 @@
 const RESULTS = {
   // Orden final de cada grupo: 1º, 2º, 3º, 4º.
   groups: {
-    A: [],
-    B: [],
-    C: [],
-    D: [],
-    E: [],
-    F: [],
+    A: ["México", "Sudáfrica", "Corea del Sur", "República Checa"],
+    B: ["Suiza", "Canadá", "Bosnia y Herzegovina", "Catar"],
+    C: ["Brasil", "Marruecos", "Escocia", "Haití"],
+    D: ["Estados Unidos", "Australia", "Paraguay", "Turquía"],
+    E: ["Alemania", "Costa de Marfil", "Ecuador", "Curazao"],
+    F: ["Países Bajos", "Japón", "Suecia", "Túnez"],
     G: [],
     H: [],
     I: [],
@@ -47,7 +47,11 @@ const RESULTS = {
   // Las claves coinciden con `[team1, team2].sort().join('__')` definido en
   // QUINIELA_1X2_MATCHES dentro de app.js. Dejar "" mientras el partido no
   // se haya jugado.
-  quiniela1x2: {},
+  quiniela1x2: {
+    "Corea del Sur__México": "1",
+    "Escocia__Marruecos":    "2",
+    "España__Uruguay":       ""
+  },
 
   knockout: {
     round32: [],

@@ -20,7 +20,7 @@ const puntuaciones = {
   },
   quiniela1x2: 1,
   eliminatorias: {
-    round32: 0,
+    round32: 2,
     round16: 5,
     quarterfinals: 5,
     semifinals: 10,
@@ -139,7 +139,8 @@ const FLAG_CODE = {
   'Francia':'fr','Senegal':'sn','Irak':'iq','Noruega':'no',
   'Argentina':'ar','Argelia':'dz','Austria':'at','Jordania':'jo',
   'Portugal':'pt','RD del Congo':'cd','Uzbekistán':'uz','Colombia':'co',
-  'Inglaterra':'gb-eng','Croacia':'hr','Ghana':'gh','Panamá':'pa'
+  'Inglaterra':'gb-eng','Croacia':'hr','Ghana':'gh','Panamá':'pa',
+  'Euskadi (País Vasco)':'es-pv'
 };
 
 const AWARD_PLAYERS = [
@@ -818,7 +819,7 @@ const AWARD_PLAYERS = [
   // Bélgica
   { name: 'Koen Casteels', country: 'Bélgica' },
   { name: 'Matz Sels', country: 'Bélgica' },
-  { name: 'Thomas Kaminski', country: 'Bélgica' },
+  { name: 'Thibaut Nogales Courtois', country: 'Bélgica' },
   { name: 'Jan Vertonghen', country: 'Bélgica' },
   { name: 'Wout Faes', country: 'Bélgica' },
   { name: 'Arthur Theate', country: 'Bélgica' },
@@ -986,7 +987,7 @@ const AWARD_PLAYERS = [
   // España
   { name: 'Unai Simón', country: 'España' },
   { name: 'David Raya', country: 'España' },
-  { name: 'Álex Remiro', country: 'España' },
+  { name: 'Joan Garcia', country: 'España' },
   { name: 'Dani Carvajal', country: 'España' },
   { name: 'Pau Cubarsí', country: 'España' },
   { name: 'Aymeric Laporte', country: 'España' },
@@ -1010,6 +1011,7 @@ const AWARD_PLAYERS = [
   { name: 'Álvaro Morata', country: 'España' },
   { name: 'Álex Baena', country: 'España' },
   { name: 'Mikel Oyarzabal', country: 'España' },
+  { name: 'Ferran Torres', country: 'España' },
   { name: 'Adrian Zurdito Garcia', country: 'España' },
 
   // Uruguay
@@ -1487,7 +1489,11 @@ const AWARD_PLAYERS = [
   { name: 'Ismael Díaz', country: 'Panamá' },
   { name: 'Tomás Rodríguez', country: 'Panamá' },
   { name: 'Eduardo Guerrero', country: 'Panamá' },
-  { name: 'Azmahar Ariano', country: 'Panamá' }
+  { name: 'Azmahar Ariano', country: 'Panamá' },
+
+  // 🐣 Easter Egg — Euskadi (País Vasco)
+  { name: 'Aritz Tokero Galdos', country: 'Euskadi (País Vasco)' },
+  { name: 'Jon Escalador Dorronsoro', country: 'Euskadi (País Vasco)' }
 
 ];
 
@@ -1694,6 +1700,7 @@ function saveLocalPredictionNow() {
   } catch (e) {
     console.warn('Could not save local prediction draft:', e);
   }
+  updateSubmitButton();
 }
 
 function saveLocalPredictionSoon() {
@@ -1883,8 +1890,8 @@ async function loadData() {
         {num:88,slot1:{type:'runner_up',group:'D'},slot2:{type:'runner_up',group:'G'}}
       ],
       round16: [
-        {num:89,slot1:{type:'winner_of',matchNum:73},slot2:{type:'winner_of',matchNum:75}},
-        {num:90,slot1:{type:'winner_of',matchNum:74},slot2:{type:'winner_of',matchNum:77}},
+        {num:89,slot1:{type:'winner_of',matchNum:74},slot2:{type:'winner_of',matchNum:77}},
+        {num:90,slot1:{type:'winner_of',matchNum:73},slot2:{type:'winner_of',matchNum:75}},
         {num:91,slot1:{type:'winner_of',matchNum:76},slot2:{type:'winner_of',matchNum:78}},
         {num:92,slot1:{type:'winner_of',matchNum:79},slot2:{type:'winner_of',matchNum:80}},
         {num:93,slot1:{type:'winner_of',matchNum:83},slot2:{type:'winner_of',matchNum:84}},
@@ -1894,8 +1901,8 @@ async function loadData() {
       ],
       quarterfinals: [
         {num:97,slot1:{type:'winner_of',matchNum:89},slot2:{type:'winner_of',matchNum:90}},
-        {num:98,slot1:{type:'winner_of',matchNum:93},slot2:{type:'winner_of',matchNum:94}},
-        {num:99,slot1:{type:'winner_of',matchNum:91},slot2:{type:'winner_of',matchNum:92}},
+        {num:98,slot1:{type:'winner_of',matchNum:91},slot2:{type:'winner_of',matchNum:92}},
+        {num:99,slot1:{type:'winner_of',matchNum:93},slot2:{type:'winner_of',matchNum:94}},
         {num:100,slot1:{type:'winner_of',matchNum:95},slot2:{type:'winner_of',matchNum:96}}
       ],
       semifinals: [
@@ -3634,12 +3641,22 @@ function scorePrediction(prediction, results = RESULTS) {
 
 // ---- Leaderboard ----
 
+// Cache of submission names (lowercase) populated when the leaderboard loads.
+// Used to detect duplicate-name submissions and show an update warning.
+const knownSubmissionNames = new Set();
+
 async function loadLeaderboard() {
+  knownSubmissionNames.clear();
+
   const res = await fetch(LEADERBOARD_CSV_URL);
   const csv = await res.text();
 
   const rows = parseCSV(csv);
-  const submissions = [];
+  // Use a Map keyed by normalized lowercase name so that later rows
+  // (= more recent submissions) silently overwrite earlier ones for the same
+  // person, while anonymous rows remain as separate entries.
+  const submissionsByName = new Map();
+  const anonymousSubmissions = [];
 
   rows.slice(1).forEach(row => {
     const rawJson = row[1];
@@ -3647,16 +3664,27 @@ async function loadLeaderboard() {
 
     try {
       const prediction = JSON.parse(rawJson);
-      submissions.push({
-        name: prediction.name || 'Anonymous',
+      const trimmedName = typeof prediction.name === 'string' ? prediction.name.trim() : '';
+      const submission = {
+        name: trimmedName || 'Anonymous',
         score: scorePrediction(prediction),
         prediction
-      });
+      };
+
+      if (trimmedName) {
+        submissionsByName.set(trimmedName.toLowerCase(), submission);
+      } else {
+        anonymousSubmissions.push(submission);
+      }
     } catch (e) {
       console.warn('Invalid prediction JSON:', rawJson);
     }
   });
 
+  // Refresh the names cache so the submit modal can warn about updates.
+  submissionsByName.forEach((_, key) => knownSubmissionNames.add(key));
+
+  const submissions = [...submissionsByName.values(), ...anonymousSubmissions];
   submissions.sort((a, b) => b.score - a.score);
   renderLeaderboardList(submissions);
 }
@@ -3891,6 +3919,7 @@ function openScoringHelpModal() {
         <div class="scoring-help-card">
           <h4>🥊 Eliminatorias</h4>
           <ul>
+            <li>Equipo en dieciseisavos: <strong>${puntuaciones.eliminatorias.round32} pts</strong></li>
             <li>Equipo en octavos: <strong>${puntuaciones.eliminatorias.round16} pts</strong></li>
             <li>Equipo en cuartos: <strong>${puntuaciones.eliminatorias.quarterfinals} pts</strong></li>
             <li>Equipo en semifinales: <strong>${puntuaciones.eliminatorias.semifinals} pts</strong></li>
@@ -4804,7 +4833,88 @@ function parseCSV(text) {
 // ---- Submit ----
 const FORM_ACTION = 'https://docs.google.com/forms/d/e/'+FORM_ID+'/formResponse';
 
+function getFormCompleteness() {
+  const missing = [];
+
+  // 1. All groups confirmed
+  const unconfirmed = GROUP_NAMES.filter(g => !state.groupsConfirmed?.[g]);
+  if (unconfirmed.length > 0) {
+    missing.push(`Fase de grupos: confirma el orden de ${unconfirmed.map(g => `Grupo ${g}`).join(', ')}`);
+  }
+
+  // 2. Quiniela 1X2 — all matches picked
+  const unpicked = QUINIELA_1X2_MATCHES.filter(m => !state.quiniela1x2?.[m.key]);
+  if (unpicked.length > 0) {
+    missing.push('Quiniela 1X2: ' + unpicked.map(m => m.team1 + ' vs ' + m.team2).join(', '));
+  }
+
+  // 3. Best thirds confirmed
+  if (!state.thirdPlaceConfirmed) {
+    missing.push('Mejores terceros: confirma el ranking de los 12 terceros');
+  }
+
+  // 4. Full knockout bracket resolved
+  if (KO_TREE) {
+    const allNums = [
+      ...KO_TREE.round32.map(m => m.num),
+      ...(KO_TREE.round16 || []).map(m => m.num),
+      ...(KO_TREE.quarterfinals || []).map(m => m.num),
+      ...(KO_TREE.semifinals || []).map(m => m.num),
+      ...(KO_TREE.final || []).map(m => m.num),
+      ...(KO_TREE.thirdPlace || []).map(m => m.num),
+    ];
+    const pending = allNums.filter(n => !state.knockoutResults[n]).length;
+    if (pending > 0) {
+      missing.push(`Fase eliminatoria: faltan ${pending} partido${pending > 1 ? 's' : ''} por decidir`);
+    }
+  }
+
+  // 5. All awards filled (read from DOM, as state.awards is only synced from localStorage on load)
+  const currentAwards = readAwards();
+  const emptyAwards = AWARDS_CONFIG.filter(a => !currentAwards[a.key]);
+  if (emptyAwards.length > 0) {
+    missing.push('Premios del Mundial: ' + emptyAwards.map(a => a.label).join(', '));
+  }
+
+  return { complete: missing.length === 0, missing };
+}
+
+function updateSubmitButton() {
+  const btn = document.getElementById('btnSubmit');
+  if (!btn || !LOADED) return;
+
+  const { complete, missing } = getFormCompleteness();
+  btn.disabled = !complete;
+
+  let hint = document.getElementById('submitHint');
+  if (!hint) {
+    hint = document.createElement('div');
+    hint.id = 'submitHint';
+    hint.className = 'submit-hint';
+    hint.setAttribute('role', 'status');
+    hint.setAttribute('aria-live', 'polite');
+    hint.setAttribute('aria-atomic', 'true');
+    btn.parentNode.insertBefore(hint, btn.nextSibling);
+  }
+
+  if (!complete) {
+    hint.innerHTML = '<strong>⚠️ Rellena estos campos antes de enviar:</strong><ul>' +
+      missing.map(m => '<li>' + escapeHtml(m) + '</li>').join('') + '</ul>';
+    hint.style.display = '';
+    btn.setAttribute('aria-describedby', 'submitHint');
+  } else {
+    hint.style.display = 'none';
+    btn.removeAttribute('aria-describedby');
+  }
+
+}
+
 function submitPrediction() {
+  const { complete, missing } = getFormCompleteness();
+  if (!complete) {
+    showToast('⚠️ Faltan campos por rellenar: ' + missing.join(' · '), true);
+    return;
+  }
   openNameModal();
 }
 
@@ -4812,15 +4922,43 @@ function openNameModal() {
   const modal = document.getElementById('nameModal');
   const input = document.getElementById('playerNameInput');
   const teamSelect = document.getElementById('teamSelect');
+  const confirmBtn = document.getElementById('confirmNameSubmit');
+  const hintEl = document.getElementById('nameModalUpdateHint');
 
   modal.style.display = 'flex';
   input.value = '';
   if (teamSelect) teamSelect.value = '';
+  if (hintEl) hintEl.style.display = 'none';
+  if (confirmBtn) {
+    confirmBtn.textContent = 'Apostar fuerte (No hay vuelta atrás)';
+    confirmBtn.dataset.isUpdate = '';
+  }
   setTimeout(() => input.focus(), 50);
 }
 
 function closeNameModal() {
   document.getElementById('nameModal').style.display = 'none';
+}
+
+function updateNameModalHint() {
+  const input = document.getElementById('playerNameInput');
+  const confirmBtn = document.getElementById('confirmNameSubmit');
+  const hintEl = document.getElementById('nameModalUpdateHint');
+  if (!input || !confirmBtn) return;
+
+  const name = input.value.trim();
+  const isUpdate = name && knownSubmissionNames.has(name.toLowerCase());
+
+  if (hintEl) {
+    hintEl.style.display = isUpdate ? '' : 'none';
+  }
+  if (isUpdate) {
+    confirmBtn.textContent = '🔄 Actualizar porra';
+    confirmBtn.dataset.isUpdate = '1';
+  } else {
+    confirmBtn.textContent = 'Apostar fuerte (No hay vuelta atrás)';
+    confirmBtn.dataset.isUpdate = '';
+  }
 }
 
 async function confirmSubmitPrediction() {
@@ -4848,6 +4986,8 @@ async function confirmSubmitPrediction() {
     return;
   }
 
+  const isUpdate = knownSubmissionNames.has(playerName.toLowerCase());
+
   const payload = buildPayload();
   payload.name = playerName;
   payload.team = playerTeam;
@@ -4857,7 +4997,7 @@ async function confirmSubmitPrediction() {
   params.append(ENTRY_ID, JSON.stringify(payload));
 
   closeNameModal();
-  showLoading('Publicando...');
+  showLoading(isUpdate ? 'Actualizando porra...' : 'Publicando...');
 
   try {
     await fetch(FORM_ACTION, {
@@ -4868,8 +5008,13 @@ async function confirmSubmitPrediction() {
     });
 
     hideLoading();
+    knownSubmissionNames.add(playerName.toLowerCase());
     fireConfetti();
-    showToast('¡Apuesta registrada! Tarda unos segundos en asomar por el ranking. Mucha suerte, crack de LKS Next.');
+    if (isUpdate) {
+      showToast('¡Porra actualizada! En unos segundos se refleja en el ranking. ¡Que ruede el balón!');
+    } else {
+      showToast('¡Apuesta registrada! Tarda unos segundos en asomar por el ranking. Mucha suerte, espero que no ganes tú.');
+    }
   } catch(e) {
     hideLoading();
     showToast('Algo ha petado al enviar. Inténtalo otra vez o avisa al de sistemas (a ver si te hace caso).', true);
@@ -4887,6 +5032,7 @@ function renderAll() {
   renderBracket();
   renderAwardSelects();
   loadLeaderboard();
+  updateSubmitButton();
 }
 
 function resetState() {
@@ -4960,6 +5106,7 @@ async function init() {
     if (e.key === 'Enter') confirmSubmitPrediction();
     if (e.key === 'Escape') closeNameModal();
   });
+  document.getElementById('playerNameInput').addEventListener('input', updateNameModalHint);
 
   document.getElementById('closePredictionModal').addEventListener('click', closePredictionModal);
 
