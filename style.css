@@ -3067,3 +3067,88 @@ header .subtitle {
 .review-award-display { display: flex; flex-direction: column; gap: 4px; }
 .review-award-real { display: block; font-weight: 700; opacity: 0.8; }
 .scoring-help-small { font-size: 12px; opacity: 0.7; margin: 6px 0 0; }
+
+/* ============================================================
+   Real knockout bracket view (autónomo + comparado)
+   ============================================================ */
+
+.real-bracket-bar {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0 18px;
+}
+
+.real-bracket-view {
+  width: 100%;
+}
+
+.real-bracket-view h3 {
+  margin: 0 0 6px;
+}
+
+.real-bracket-container {
+  margin-top: 14px;
+}
+
+.real-bracket-empty {
+  text-align: center;
+  padding: 24px 12px;
+  opacity: 0.8;
+}
+
+.review-knockout-toggle-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.review-knockout-toggle[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.review-knockout-real-pane {
+  margin-top: 22px;
+  border-top: 2px dashed rgba(102,187,106,0.45);
+  padding-top: 18px;
+}
+
+.review-knockout-bracket.review-knockout-real .review-knockout-title {
+  color: #2E7D32;
+  font-weight: 800;
+}
+
+.review-knockout-bracket.review-knockout-real .bracket-slot {
+  border-color: #66bb6a;
+}
+
+.review-knockout-bracket.review-knockout-real .bracket-slot.winner {
+  background: rgba(232,245,233,0.92);
+  border-color: #2E7D32;
+  color: #1b3a1f;
+}
+
+.review-knockout-bracket.review-knockout-real svg path {
+  stroke: #43a047 !important;
+}
+
+.review-knockout-bracket.review-knockout-real::before {
+  content: 'REAL';
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  background: #2E7D32;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 5;
+}
+
+@media (max-width: 760px) {
+  .review-knockout-toggle-wrap {
+    width: 100%;
+    justify-content: center;
+  }
+}
