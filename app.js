@@ -3830,6 +3830,44 @@ function closePredictionModal() {
 }
 
 
+function hasAnyRealKnockoutMatch() {
+  const matches = RESULTS?.knockout?.matches || {};
+  return ['round32','round16','quarterfinals','semifinals','thirdPlace','final'].some(round => {
+    const arr = matches[round];
+    return Array.isArray(arr) && arr.some(m => m && (m.team1 || m.team2 || m.winner));
+  });
+}
+
+function openRealBracketModal() {
+  const modal = document.getElementById('predictionModal');
+  const viewer = document.getElementById('predictionViewer');
+
+  modal.style.display = 'flex';
+  viewer.innerHTML = `
+    <div class="real-bracket-view">
+      <h3>🥊 Cuadro real del Mundial 2026</h3>
+      <p class="note-text">Así va el bracket oficial según los resultados ya confirmados. Lo que aún no se ha jugado aparecerá vacío.</p>
+      <div class="real-bracket-container" id="realBracketContainer"></div>
+    </div>
+  `;
+
+  const container = viewer.querySelector('#realBracketContainer');
+
+  if (!hasAnyRealKnockoutMatch()) {
+    container.innerHTML = '<p class="note-text real-bracket-empty">Todavía no hay ningún partido de eliminatorias jugado. Vuelve cuando empiecen los dieciseisavos.</p>';
+    return;
+  }
+
+  const realState = buildKnockoutReviewState(RESULTS);
+  const pane = document.createElement('div');
+  pane.className = 'bracket-wrapper review-knockout-pane';
+  const bracket = renderKnockoutBracket(realState, '', {
+    extraClass: 'review-knockout-real'
+  });
+  pane.appendChild(bracket);
+  container.appendChild(pane);
+}
+
 function openScoringHelpModal() {
   const modal = document.getElementById('predictionModal');
   const viewer = document.getElementById('predictionViewer');
@@ -4486,11 +4524,17 @@ function renderKnockoutBracket(reviewState, titleText, options = {}) {
 function renderReviewKnockout(prediction) {
   const container = document.getElementById('reviewKnockout');
   container.className = 'review-knockout-click-section';
+  const hasRealBracket = hasAnyRealKnockoutMatch();
   container.innerHTML = `
     <div class="review-knockout-header">
       <div>
         <h4 class="group-modal-section-title"><span>🏆</span> ELIMINATORIAS: APOSTADO VS REAL</h4>
         <p class="note-text review-knockout-note">Haz click en un partido para comparar el cruce esperado con el cruce real, cuando ese partido real ya exista.</p>
+      </div>
+      <div class="review-knockout-toggle-wrap">
+        <button type="button" class="toolbar-btn review-knockout-toggle" id="toggleRealBracketBtn"${hasRealBracket ? '' : ' disabled'}>
+          ${hasRealBracket ? '🥊 Mostrar cuadro real junto al tuyo' : '🥊 Todavía no hay partidos reales'}
+        </button>
       </div>
     </div>
   `;
@@ -4598,6 +4642,31 @@ function renderReviewKnockout(prediction) {
 
   pane.appendChild(predictedBracket);
   container.appendChild(pane);
+
+  const realPane = document.createElement('div');
+  realPane.className = 'bracket-wrapper review-knockout-pane review-knockout-real-pane';
+  realPane.style.display = 'none';
+  container.appendChild(realPane);
+
+  const toggleBtn = container.querySelector('#toggleRealBracketBtn');
+  if (toggleBtn && hasRealBracket) {
+    let shown = false;
+    let realBracketRendered = false;
+    toggleBtn.addEventListener('click', () => {
+      shown = !shown;
+      if (shown && !realBracketRendered) {
+        const realBracketEl = renderKnockoutBracket(realState, 'Cuadro real', {
+          extraClass: 'review-knockout-real'
+        });
+        realPane.appendChild(realBracketEl);
+        realBracketRendered = true;
+      }
+      realPane.style.display = shown ? '' : 'none';
+      toggleBtn.textContent = shown
+        ? '🙈 Ocultar cuadro real'
+        : '🥊 Mostrar cuadro real junto al tuyo';
+    });
+  }
 }
 
 function renderReviewQuiniela1x2(prediction) {
@@ -4879,6 +4948,10 @@ async function init() {
   const btnScoringHelp = document.getElementById('btnScoringHelp');
   if (btnScoringHelp) {
     btnScoringHelp.addEventListener('click', openScoringHelpModal);
+  }
+  const btnRealBracket = document.getElementById('btnRealBracket');
+  if (btnRealBracket) {
+    btnRealBracket.addEventListener('click', openRealBracketModal);
   }
   document.getElementById('btnSubmit').addEventListener('click', submitPrediction);
   document.getElementById('confirmNameSubmit').addEventListener('click', confirmSubmitPrediction);
