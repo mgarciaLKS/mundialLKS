@@ -30,9 +30,9 @@ const RESULTS = {
     D: ["Estados Unidos", "Australia", "Paraguay", "Turquía"],
     E: ["Alemania", "Costa de Marfil", "Ecuador", "Curazao"],
     F: ["Países Bajos", "Japón", "Suecia", "Túnez"],
-    G: [],
-    H: [],
-    I: [],
+    G: ["Bélgica", "Egipto", "Irán", "Nueva Zelanda"],
+    H: ["España", "Cabo Verde", "Uruguay", "Arabia Saudí"],
+    I: ["Francia", "Noruega", "Senegal", "Irak"],
     J: [],
     K: [],
     L: []
