@@ -50,7 +50,7 @@ const RESULTS = {
   quiniela1x2: {
     "Corea del Sur__México": "1",
     "Escocia__Marruecos":    "2",
-    "España__Uruguay":       ""
+    "España__Uruguay":       "2"
   },
 
   knockout: {
