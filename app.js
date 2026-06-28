@@ -4260,9 +4260,30 @@ function buildKnockoutReviewState(source) {
     // match 101 is Portugal vs Norway, the popup/bracket for match 101 must show
     // exactly that, regardless of what the computed bracket path would produce.
     if (Array.isArray(explicitMatches)) {
-      explicitMatches.forEach(setExplicitMatch);
+      const isR32 = roundName === 'round32';
+      explicitMatches.forEach(item => {
+        if (!item || item.match === undefined || item.match === null) return;
+        const matchNum = Number(item.match);
+        if (!Number.isFinite(matchNum)) return;
+
+        if (isR32 && (item.team1 || item.team2)) {
+          state.matchTeams[matchNum] = {
+            team1: item.team1 || null,
+            team2: item.team2 || null
+          };
+        }
+
+        if (item.winner) {
+          state.knockoutResults[matchNum] = item.winner;
+        }
+      });
+
+      // After applying R32 winners, recompute all downstream matchTeams so that R16+
+      // slots are populated with the correct teams derived from R32 results.
+      if (isR32) computeMatchTeams();
       return;
     }
+
 
     // Legacy payload format: only winner arrays, so we infer the match by team.
     const winners = knockout[roundName] || [];
