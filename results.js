@@ -33,14 +33,23 @@ const RESULTS = {
     G: ["Bélgica", "Egipto", "Irán", "Nueva Zelanda"],
     H: ["España", "Cabo Verde", "Uruguay", "Arabia Saudí"],
     I: ["Francia", "Noruega", "Senegal", "Irak"],
-    J: [],
-    K: [],
-    L: []
+    J: ["Argentina", "Austria", "Argelia", "Jordania"],
+    K: ["Colombia", "Portugal", "RD Congo", "Uzbekistán"],
+    L: ["Inglaterra", "Croacia", "Ghana", "Panamá"]
   },
 
   // Los 8 mejores terceros que clasifican a dieciseisavos,
   // en orden (1º mejor tercero → 8º mejor tercero).
-  thirdPlace: [],
+  thirdPlace: [
+    "RD Congo",         // 4 pts, DG +1
+    "Suecia",           // 4 pts, DG  0, 7 GF
+    "Ecuador",          // 4 pts, DG  0, 2 GF
+    "Ghana",            // 4 pts, DG  0, 2 GF
+    "Bosnia y Herzegovina", // 4 pts, DG -1
+    "Argelia",          // 4 pts, DG -2, 5 GF
+    "Paraguay",         // 4 pts, DG -2, 2 GF
+    "Senegal"           // 3 pts
+  ],
 
   // Quiniela 1X2 — resultados reales de los 3 partidos fijos.
   // Valores admitidos: "1" (gana team1), "X" (empate), "2" (gana team2).
@@ -54,7 +63,19 @@ const RESULTS = {
   },
 
   knockout: {
-    round32: [],
+    round32: [
+      // 12 primeros clasificados
+      "México", "Suiza", "Brasil", "Estados Unidos",
+      "Alemania", "Países Bajos", "Bélgica", "España",
+      "Francia", "Argentina", "Colombia", "Inglaterra",
+      // 12 segundos clasificados
+      "Sudáfrica", "Canadá", "Marruecos", "Australia",
+      "Costa de Marfil", "Japón", "Egipto", "Cabo Verde",
+      "Noruega", "Austria", "Portugal", "Croacia",
+      // 8 mejores terceros
+      "Bosnia y Herzegovina", "Paraguay", "Ecuador", "Suecia",
+      "Senegal", "Argelia", "RD Congo", "Ghana"
+    ],
     round16: [],
     quarterfinals: [],
     semifinals: [],
