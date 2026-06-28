@@ -1901,8 +1901,8 @@ async function loadData() {
       ],
       quarterfinals: [
         {num:97,slot1:{type:'winner_of',matchNum:89},slot2:{type:'winner_of',matchNum:90}},
-        {num:98,slot1:{type:'winner_of',matchNum:91},slot2:{type:'winner_of',matchNum:92}},
-        {num:99,slot1:{type:'winner_of',matchNum:93},slot2:{type:'winner_of',matchNum:94}},
+        {num:98,slot1:{type:'winner_of',matchNum:93},slot2:{type:'winner_of',matchNum:94}},
+        {num:99,slot1:{type:'winner_of',matchNum:91},slot2:{type:'winner_of',matchNum:92}},
         {num:100,slot1:{type:'winner_of',matchNum:95},slot2:{type:'winner_of',matchNum:96}}
       ],
       semifinals: [
