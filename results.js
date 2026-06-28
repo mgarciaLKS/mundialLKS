@@ -34,14 +34,14 @@ const RESULTS = {
     H: ["España", "Cabo Verde", "Uruguay", "Arabia Saudí"],
     I: ["Francia", "Noruega", "Senegal", "Irak"],
     J: ["Argentina", "Austria", "Argelia", "Jordania"],
-    K: ["Colombia", "Portugal", "RD Congo", "Uzbekistán"],
+    K: ["Colombia", "Portugal", "RD del Congo", "Uzbekistán"],
     L: ["Inglaterra", "Croacia", "Ghana", "Panamá"]
   },
 
   // Los 8 mejores terceros que clasifican a dieciseisavos,
   // en orden (1º mejor tercero → 8º mejor tercero).
   thirdPlace: [
-    "RD Congo",         // 4 pts, DG +1
+    "RD del Congo",     // 4 pts, DG +1
     "Suecia",           // 4 pts, DG  0, 7 GF
     "Ecuador",          // 4 pts, DG  0, 2 GF
     "Ghana",            // 4 pts, DG  0, 2 GF
@@ -74,7 +74,7 @@ const RESULTS = {
       "Noruega", "Austria", "Portugal", "Croacia",
       // 8 mejores terceros
       "Bosnia y Herzegovina", "Paraguay", "Ecuador", "Suecia",
-      "Senegal", "Argelia", "RD Congo", "Ghana"
+      "Senegal", "Argelia", "RD del Congo", "Ghana"
     ],
     round16: [],
     quarterfinals: [],
