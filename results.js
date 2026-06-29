@@ -76,7 +76,7 @@ const RESULTS = {
       "Bosnia y Herzegovina", "Paraguay", "Ecuador", "Suecia",
       "Senegal", "Argelia", "RD del Congo", "Ghana"
     ],
-    round16: ["Canadá"],
+    round16: [],
     quarterfinals: [],
     semifinals: [],
 
