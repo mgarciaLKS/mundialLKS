@@ -76,7 +76,7 @@ const RESULTS = {
       "Bosnia y Herzegovina", "Paraguay", "Ecuador", "Suecia",
       "Senegal", "Argelia", "RD del Congo", "Ghana"
     ],
-    round16: ["Canadá"],
+    round16: [],
     quarterfinals: [],
     semifinals: [],
 
@@ -89,7 +89,10 @@ const RESULTS = {
     thirdPlace: "",
 
     matches: {
-      round32: [],
+      round32: [
+        // Partido 73: Sudáfrica (2º A) vs Canadá (2º B)
+        {match: 73, team1: "Sudáfrica", team2: "Canadá", winner: "Canadá"}
+      ],
       round16: [],
       quarterfinals: [],
       semifinals: [],
