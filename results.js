@@ -93,11 +93,11 @@ const RESULTS = {
         // Partido 73: 2ºA vs 2ºB
         {match: 73, team1: "Sudáfrica",      team2: "Canadá",              winner: "Canadá"},
         // Partido 74: 1ºE vs 3ºD
-        {match: 74, team1: "Alemania",        team2: "Paraguay",            winner: ""},
+        {match: 74, team1: "Alemania",        team2: "Paraguay",            winner: "Paraguay"},
         // Partido 75: 1ºF vs 2ºC
-        {match: 75, team1: "Países Bajos",    team2: "Marruecos",           winner: ""},
+        {match: 75, team1: "Países Bajos",    team2: "Marruecos",           winner: "Marruecos"},
         // Partido 76: 1ºC vs 2ºF
-        {match: 76, team1: "Brasil",          team2: "Japón",               winner: ""},
+        {match: 76, team1: "Brasil",          team2: "Japón",               winner: "Brasil"},
         // Partido 77: 1ºI vs 3ºF
         {match: 77, team1: "Francia",         team2: "Suecia",              winner: ""},
         // Partido 78: 2ºE vs 2ºI
