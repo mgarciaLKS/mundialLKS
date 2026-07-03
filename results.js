@@ -138,7 +138,7 @@ const RESULTS = {
         {match: 94, team1: "Estados Unidos",  team2: "Bélgica",   winner: ""},
         // Partido 95: W86 vs W88
         {match: 95, team1: "",               team2: "",          winner: ""},
-        // Partido 96: W85 vs W87 — pendiente
+        // Partido 96: W85 vs W87
         {match: 96, team1: "",               team2: "",          winner: ""}
       ],
       quarterfinals: [],
