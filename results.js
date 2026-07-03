@@ -111,9 +111,9 @@ const RESULTS = {
         // Partido 82: 1ºG vs 3ºI
         {match: 82, team1: "Bélgica",         team2: "Senegal",             winner: "Bélgica"},
         // Partido 83: 2ºK vs 2ºL
-        {match: 83, team1: "Portugal",        team2: "Croacia",             winner: ""},
+        {match: 83, team1: "Portugal",        team2: "Croacia",             winner: "Portugal"},
         // Partido 84: 1ºH vs 2ºJ
-        {match: 84, team1: "España",          team2: "Austria",             winner: ""},
+        {match: 84, team1: "España",          team2: "Austria",             winner: "España"},
         // Partido 85: 1ºB vs 3ºJ
         {match: 85, team1: "Suiza",           team2: "Argelia",             winner: ""},
         // Partido 86: 1ºJ vs 2ºH
