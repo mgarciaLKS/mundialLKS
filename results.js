@@ -136,7 +136,7 @@ const RESULTS = {
         {match: 93, team1: "Portugal",        team2: "España",    winner: ""},
         // Partido 94: W81 vs W82
         {match: 94, team1: "Estados Unidos",  team2: "Bélgica",   winner: ""},
-        // Partido 95: W86 vs W88 — pendiente
+        // Partido 95: W86 vs W88
         {match: 95, team1: "",               team2: "",          winner: ""},
         // Partido 96: W85 vs W87 — pendiente
         {match: 96, team1: "",               team2: "",          winner: ""}
