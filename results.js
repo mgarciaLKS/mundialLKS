@@ -123,7 +123,24 @@ const RESULTS = {
         // Partido 88: 2ºD vs 2ºG
         {match: 88, team1: "Australia",       team2: "Egipto",              winner: ""}
       ],
-      round16: [],
+      round16: [
+        // Partido 89: W74 vs W77
+        {match: 89, team1: "Paraguay",       team2: "Francia",   winner: ""},
+        // Partido 90: W73 vs W75
+        {match: 90, team1: "Canadá",         team2: "Marruecos", winner: ""},
+        // Partido 91: W76 vs W78
+        {match: 91, team1: "Brasil",          team2: "Noruega",   winner: ""},
+        // Partido 92: W79 vs W80
+        {match: 92, team1: "México",          team2: "Inglaterra",winner: ""},
+        // Partido 93: W83 vs W84
+        {match: 93, team1: "Portugal",        team2: "España",    winner: ""},
+        // Partido 94: W81 vs W82
+        {match: 94, team1: "Estados Unidos",  team2: "Bélgica",   winner: ""},
+        // Partido 95: W86 vs W88 — pendiente
+        {match: 95, team1: "",               team2: "",          winner: ""},
+        // Partido 96: W85 vs W87 — pendiente
+        {match: 96, team1: "",               team2: "",          winner: ""}
+      ],
       quarterfinals: [],
       semifinals: [],
       thirdPlace: [],
