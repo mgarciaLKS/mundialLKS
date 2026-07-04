@@ -115,19 +115,19 @@ const RESULTS = {
         // Partido 84: 1ºH vs 2ºJ
         {match: 84, team1: "España",          team2: "Austria",             winner: "España"},
         // Partido 85: 1ºB vs 3ºJ
-        {match: 85, team1: "Suiza",           team2: "Argelia",             winner: ""},
+        {match: 85, team1: "Suiza",           team2: "Argelia",             winner: "Suiza"},
         // Partido 86: 1ºJ vs 2ºH
-        {match: 86, team1: "Argentina",       team2: "Cabo Verde",          winner: ""},
+        {match: 86, team1: "Argentina",       team2: "Cabo Verde",          winner: "Argentina"},
         // Partido 87: 1ºK vs 3ºL
-        {match: 87, team1: "Colombia",        team2: "Ghana",               winner: ""},
+        {match: 87, team1: "Colombia",        team2: "Ghana",               winner: "Colombia"},
         // Partido 88: 2ºD vs 2ºG
-        {match: 88, team1: "Australia",       team2: "Egipto",              winner: ""}
+        {match: 88, team1: "Australia",       team2: "Egipto",              winner: "Egipto"}
       ],
       round16: [
         // Partido 89: W74 vs W77
         {match: 89, team1: "Paraguay",       team2: "Francia",   winner: ""},
         // Partido 90: W73 vs W75
-        {match: 90, team1: "Canadá",         team2: "Marruecos", winner: ""},
+        {match: 90, team1: "Canadá",         team2: "Marruecos", winner: "Marruecos"},
         // Partido 91: W76 vs W78
         {match: 91, team1: "Brasil",          team2: "Noruega",   winner: ""},
         // Partido 92: W79 vs W80
@@ -137,9 +137,9 @@ const RESULTS = {
         // Partido 94: W81 vs W82
         {match: 94, team1: "Estados Unidos",  team2: "Bélgica",   winner: ""},
         // Partido 95: W86 vs W88
-        {match: 95, team1: "",               team2: "",          winner: ""},
+        {match: 95, team1: "Argentina",      team2: "Egipto",    winner: ""},
         // Partido 96: W85 vs W87
-        {match: 96, team1: "",               team2: "",          winner: ""}
+        {match: 96, team1: "Suiza",          team2: "Colombia",  winner: ""}
       ],
       quarterfinals: [],
       semifinals: [],
