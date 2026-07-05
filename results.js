@@ -125,7 +125,7 @@ const RESULTS = {
       ],
       round16: [
         // Partido 89: W74 vs W77
-        {match: 89, team1: "Paraguay",       team2: "Francia",   winner: ""},
+        {match: 89, team1: "Paraguay",       team2: "Francia",   winner: "Francia"},
         // Partido 90: W73 vs W75
         {match: 90, team1: "Canadá",         team2: "Marruecos", winner: "Marruecos"},
         // Partido 91: W76 vs W78
