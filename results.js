@@ -137,7 +137,7 @@ const RESULTS = {
         // Partido 94: W81 vs W82
         {match: 94, team1: "Estados Unidos",  team2: "Bélgica",   winner: "Bélgica"},
         // Partido 95: W86 vs W88
-        {match: 95, team1: "Argentina",      team2: "Egipto",    winner: ""},
+        {match: 95, team1: "Argentina",      team2: "Egipto",    winner: "Argentina"},
         // Partido 96: W85 vs W87
         {match: 96, team1: "Suiza",          team2: "Colombia",  winner: ""}
       ],
