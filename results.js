@@ -143,9 +143,9 @@ const RESULTS = {
       ],
       quarterfinals: [
         {match: 97, team1: "Marruecos",   team2: "Francia",      winner: "Francia"},
-        {match: 98, team1: "España",      team2: "Bélgica",      winner: null},
-        {match: 99, team1: "Noruega",     team2: "Inglaterra",   winner: null},
-        {match: 100, team1: "Argentina",  team2: "Suiza",        winner: null}
+        {match: 98, team1: "España",      team2: "Bélgica",      winner: "España"},
+        {match: 99, team1: "Noruega",     team2: "Inglaterra",   winner: "Inglaterra"},
+        {match: 100, team1: "Argentina",  team2: "Suiza",        winner: "Argentina"}
       ],
       semifinals: [],
       thirdPlace: [],
