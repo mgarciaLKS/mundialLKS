@@ -147,7 +147,10 @@ const RESULTS = {
         {match: 99, team1: "Noruega",     team2: "Inglaterra",   winner: "Inglaterra"},
         {match: 100, team1: "Argentina",  team2: "Suiza",        winner: "Argentina"}
       ],
-      semifinals: [],
+      semifinals: [
+        {match: 101, team1: "Francia",    team2: "España",            winner: "España"},
+        {match: 102, team1: "Inglaterra", team2: "BélArgentinagica",  winner: null}
+      ],
       thirdPlace: [],
       final: []
     }
