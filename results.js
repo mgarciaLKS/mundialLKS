@@ -151,8 +151,12 @@ const RESULTS = {
         {match: 101, team1: "Francia",    team2: "España",            winner: "España"},
         {match: 102, team1: "Inglaterra", team2: "BélArgentinagica",  winner: null}
       ],
-      thirdPlace: [],
-      final: []
+      thirdPlace: [
+        {match: 103, team1: "Francia", team2: null,  winner: null}
+      ],
+      final: [
+        {match: 104, team1: "España", team2: null,  winner: null}
+      ]
     }
   },
 
