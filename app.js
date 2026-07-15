@@ -3935,7 +3935,7 @@ function openScoringHelpModal() {
             <li>Equipo en cuartos: <strong>${puntuaciones.eliminatorias.quarterfinals} pts</strong></li>
             <li>Equipo en semifinales: <strong>${puntuaciones.eliminatorias.semifinals} pts</strong></li>
             <li>Finalista: <strong>${puntuaciones.eliminatorias.finalist} pts</strong></li>
-            <li>Campeón: <strong>+${puntuaciones.eliminatorias.champion} pts</strong></li>
+            <li>Campeón: <strong>${puntuaciones.eliminatorias.champion} pts</strong></li>
             <li>Tercer puesto: <strong>${puntuaciones.eliminatorias.thirdPlace} pts</strong></li>
           </ul>
         </div>
