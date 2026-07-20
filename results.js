@@ -152,10 +152,10 @@ const RESULTS = {
         {match: 102, team1: "Inglaterra", team2: "Argentina",  winner: "Argentina"}
       ],
       thirdPlace: [
-        {match: 103, team1: "Francia", team2: "Inglaterra",  winner: null}
+        {match: 103, team1: "Francia", team2: "Inglaterra",  winner: "Inglaterra"}
       ],
       final: [
-        {match: 104, team1: "España",  team2: "Argentina",   winner: null}
+        {match: 104, team1: "España",  team2: "Argentina",   winner: "España"}
       ]
     }
   },
@@ -163,9 +163,9 @@ const RESULTS = {
   semifinalists: ["España", "Argentina", "Francia", "Inglaterra"],
   finalists: ["España", "Argentina"],
 
-  champion: "",
-  runnerUp: "",
-  thirdPlaceWinner: "",
+  champion: "España",
+  runnerUp: "Argentina",
+  thirdPlaceWinner: "Inglaterra",
 
   // 5 categorías divertidas — todas son una sola elección por categoría.
   // "topScorer", "topAssister" y "goldenGlove" esperan el NOMBRE de un jugador
@@ -173,10 +173,10 @@ const RESULTS = {
   // "topScoringTeam" y "mostConcededTeam" esperan el NOMBRE de una selección
   //   (tal y como aparece en los grupos).
   awards: {
-    topScorer: "",
-    topAssister: "",
-    goldenGlove: "",
-    topScoringTeam: "",
-    mostConcededTeam: ""
+    topScorer:        "Kylian Mbappé",
+    topAssister:      "Michael Olise",
+    goldenGlove:      "Unai Simón",
+    topScoringTeam:   "Francia",
+    mostConcededTeam: "Francia"
   }
 };
