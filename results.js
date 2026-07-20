@@ -177,6 +177,6 @@ const RESULTS = {
     topAssister:      "Michael Olise",
     goldenGlove:      "Unai Simón",
     topScoringTeam:   "Francia",
-    mostConcededTeam: "Francia"
+    mostConcededTeam: ["Túnez", "Irak"]
   }
 };

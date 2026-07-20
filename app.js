@@ -3633,7 +3633,8 @@ function scorePrediction(prediction, results = RESULTS) {
   AWARDS_CONFIG.forEach(cfg => {
     const real = realAwards[cfg.key];
     const pred = predAwards[cfg.key];
-    if (real && pred && real === pred) score += cfg.points;
+    const realArr = Array.isArray(real) ? real : (real ? [real] : []);
+    if (realArr.length && pred && realArr.includes(pred)) score += cfg.points;
   });
 
   return score;
@@ -4772,10 +4773,12 @@ function renderReviewAwards(prediction) {
 
   AWARDS_CONFIG.forEach(cfg => {
     const predicted = typeof predAwards[cfg.key] === 'string' ? predAwards[cfg.key] : '';
-    const real = typeof realAwards[cfg.key] === 'string' ? realAwards[cfg.key] : '';
-    const resolved = Boolean(real);
-    const correct = resolved && predicted && predicted === real;
-    const wrong = resolved && predicted !== real;
+    const realRaw = realAwards[cfg.key];
+    const realArr = Array.isArray(realRaw) ? realRaw : (realRaw ? [realRaw] : []);
+    const real = realArr.join(' / ');
+    const resolved = realArr.length > 0;
+    const correct = resolved && predicted && realArr.includes(predicted);
+    const wrong = resolved && predicted && !realArr.includes(predicted);
 
     const row = document.createElement('div');
     row.className =
